@@ -39,7 +39,7 @@ pipeline{
         stage('SAST'){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                    withSonarQubeEnv(credentialsId: 'sonarqube-yonaetworks') {
                         sh '/opt/maven-3.9/bin/mvn clean package sonar:sonar'
                     }
                    }  
