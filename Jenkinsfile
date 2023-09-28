@@ -49,7 +49,7 @@ pipeline{
         stage('SAST-2'){
             steps{
                 script{
-                    waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube-yonaetworks')
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube-yonaetworks'
                 }  
             }
         }
