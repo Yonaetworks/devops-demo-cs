@@ -11,19 +11,11 @@ pipeline{
                 }
             }
         }
-
-        stage('maven setup'){
-            steps{
-                script{
-                    sh 'export PATH=$PATH:/opt/maven-3.9/bin'
-                }
-            }
-        }
     
         stage('Pruebas unitarias'){
             steps{
                 script{
-                    sh 'mvn test'
+                    sh '/opt/maven-3.9/bin/mvn test'
                 }
             }
         }
@@ -31,7 +23,7 @@ pipeline{
         stage('Pruebas de integracion'){
             steps{
                 script{
-                    sh 'mvn verify -DskipUnitTests'
+                    sh '/opt/maven-3.9/bin/mvn verify -DskipUnitTests'
                 }
             }
         }
@@ -39,7 +31,7 @@ pipeline{
         stage('Build'){
             steps{
                 script{
-                    sh 'mvn clean install'
+                    sh '/opt/maven-3.9/bin/mvn clean install'
                 }
             }
         }
