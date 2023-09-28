@@ -11,6 +11,14 @@ pipeline{
                 }
             }
         }
+
+        stage('maven setup'){
+            steps{
+                script{
+                    sh 'export PATH=$PATH:/opt/maven-3.9/bin'
+                }
+            }
+        }
     
         stage('Pruebas unitarias'){
             steps{
