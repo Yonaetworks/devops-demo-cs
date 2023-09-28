@@ -39,11 +39,9 @@ pipeline{
         stage('SAST'){
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonarqube-yonaetworks') {
-                        sh '/opt/maven-3.9/bin/mvn clean package sonar:sonar'
-                    }
-                   }  
-                }
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube-yonaetworks')
+                }  
             }
+        }
     }  
 }
