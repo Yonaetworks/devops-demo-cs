@@ -46,10 +46,18 @@ pipeline{
                 }
             }
         
-        stage('SAST-2'){
+        stage('SAST-2 Quality Gate'){
             steps{
                 script{
                     waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube-yonaetworks'
+                }  
+            }
+        }
+
+        stage('Upload Artifact'){
+            steps{
+                script{
+                    nexusArtifactUploader artifacts: [[artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexus-auth', groupId: 'com.example', nexusUrl: '44.202.223.9:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'demo-app-cs', version: '1.0'
                 }  
             }
         }
