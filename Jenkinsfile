@@ -35,11 +35,21 @@ pipeline{
                 }
             }
         }
-        
-        stage('SAST'){
+
+         stage('SAST-1'){
             steps{
                 script{
-                    waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube-yonaetworks'
+                    withSonarQubeEnv(credentialsId: 'sonarqube-yonaetworks') {
+                        sh '/opt/maven-3.9/bin/mvn clean package sonar:sonar'
+                    }
+                   }  
+                }
+            }
+        
+        stage('SAST-2'){
+            steps{
+                script{
+                    waitForQualityGate abortPipeline: true, credentialsId: 'sonarqube-yonaetworks')
                 }  
             }
         }
